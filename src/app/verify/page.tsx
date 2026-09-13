@@ -42,6 +42,8 @@ export default function VerifyPage() {
   const [communities, setCommunities] = useState<CommunityInfo[]>([]);
   const [loading, setLoading] = useState(false);
   const [showProofDetail, setShowProofDetail] = useState(false);
+  const [demoMode, setDemoMode] = useState(false);
+  const [demoSealClaimed, setDemoSealClaimed] = useState(false);
   
   const [anonAadhaar] = useAnonAadhaar();
   const TEST_NULLIFIER_SEED = 123456789; // Matches the smart contract test/app seed
@@ -87,6 +89,11 @@ export default function VerifyPage() {
       setError("Server error — could not reach proof service");
     }
     setLoading(false);
+  };
+
+  const handleClaimSealDemo = async () => {
+    // Demo mode: simulate the on-chain transaction
+    setDemoSealClaimed(true);
   };
 
   const handleClaimSeal = async () => {
@@ -382,40 +389,53 @@ export default function VerifyPage() {
                     <span className="public-badge">Wallet ✓</span>
                   </div>
 
-                  {anonAadhaar.status !== "logged-in" ? (
+                  {anonAadhaar.status !== "logged-in" && !demoMode ? (
                     <div className="border border-saffron/20 p-6 text-center animate-fade-in">
                       <h3 className="text-lg font-semibold mb-2">Prove Unique Identity</h3>
                       <p className="text-sm text-warm-gray mb-6">
                         Chaupal enforces &quot;One Human, One Claim&quot;. Please generate a Zero-Knowledge proof 
                         using your Aadhaar to prove you are a unique human. Your raw data never leaves this device.
                       </p>
-                      <div className="flex justify-center">
+                      <div className="flex justify-center mb-4">
                         <LogInWithAnonAadhaar nullifierSeed={TEST_NULLIFIER_SEED} signal={address ? BigInt(address).toString() : "1"} />
+                      </div>
+                      <div className="border-t border-saffron/10 pt-4 mt-2">
+                        <p className="text-xs text-warm-gray/60 mb-2">ZK proof generation may fail on some machines due to browser WASM limits.</p>
+                        <button
+                          onClick={() => setDemoMode(true)}
+                          className="text-xs text-saffron/70 hover:text-saffron underline transition-colors"
+                        >
+                          Use Demo Mode (skip ZK proof for hackathon)
+                        </button>
                       </div>
                     </div>
                   ) : (
                     <div className="border border-deep-green/20 p-6 animate-fade-in">
                       <div className="flex items-center gap-4 py-3 mb-4">
                         <div className="w-6 h-6 flex items-center justify-center text-deep-green text-sm bg-deep-green/10 rounded-full">✓</div>
-                        <span className="text-sm text-ivory/80 flex-1">Anon Aadhaar Proof Generated</span>
-                        <span className="private-badge">ZK Proof</span>
+                        <span className="text-sm text-ivory/80 flex-1">
+                          {demoMode ? "Identity Verified (Demo Mode)" : "Anon Aadhaar Proof Generated"}
+                        </span>
+                        <span className="private-badge">{demoMode ? "Demo" : "ZK Proof"}</span>
                       </div>
                       
                       <button
-                        onClick={handleClaimSeal}
-                        disabled={isWriting || isConfirming}
+                        onClick={demoMode ? handleClaimSealDemo : handleClaimSeal}
+                        disabled={demoMode ? demoSealClaimed : (isWriting || isConfirming)}
                         className="btn w-full text-base py-4"
                       >
-                        {isWriting
-                          ? "Waiting for signature…"
-                          : isConfirming
-                          ? "Confirming on-chain…"
-                          : "Claim Community Seal"}
+                        {demoMode 
+                          ? (demoSealClaimed ? "Seal Claimed ✓" : "Claim Community Seal")
+                          : (isWriting
+                            ? "Waiting for signature…"
+                            : isConfirming
+                            ? "Confirming on-chain…"
+                            : "Claim Community Seal")}
                       </button>
                     </div>
                   )}
 
-                  {isConfirmed && (
+                  {(isConfirmed || demoSealClaimed) && (
                     <div className="border border-deep-green/30 bg-deep-green/5 p-6 text-center animate-fade-in mt-6">
                       {/* The Seal */}
                       <div className="w-32 h-32 mx-auto mb-6 border-2 border-saffron rounded-full flex items-center justify-center">
@@ -430,7 +450,7 @@ export default function VerifyPage() {
                         <span className="text-ivory/80">{selectedCommunity?.name}</span>{" "}
                         has been minted.
                       </p>
-                      <div className="onchain-badge mx-auto">Soulbound · Non-transferable</div>
+                      <div className="onchain-badge mx-auto">{demoMode ? "Demo · Soulbound · Non-transferable" : "Soulbound · Non-transferable"}</div>
                     </div>
                   )}
                 </div>
