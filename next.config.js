@@ -11,13 +11,15 @@ const nextConfig = {
     config.resolve.fallback = {
       ...config.resolve.fallback,
       '@x402/evm/upto/client': false,
+      '@x402/evm/exact/client': false,
     };
     config.resolve.alias = {
       ...config.resolve.alias,
       '@x402/evm/upto/client': false,
+      '@x402/evm/exact/client': false,
     };
     if (isServer) {
-      config.externals.push('@x402/evm/upto/client');
+      config.externals.push('@x402/evm/upto/client', '@x402/evm/exact/client');
     }
     config.ignoreWarnings = [
       { module: /node_modules\/web-worker/ },
