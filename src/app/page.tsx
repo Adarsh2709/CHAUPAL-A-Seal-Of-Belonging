@@ -7,34 +7,50 @@ export default function Home() {
       <Navbar />
 
       {/* ─── Hero ─── */}
-      <section className="pt-28 pb-24 px-4 border-b border-border-subtle">
-        <div className="max-w-3xl mx-auto">
-          <p className="label-caps text-saffron mb-6">
-            Road to Devcon IV — Hackathon Submission
-          </p>
-          <h1 className="font-serif text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight leading-[1.05] mb-8">
-            A seal of belonging,<br />
-            <span className="text-saffron">without opening<br className="hidden sm:inline" /> the cupboard.</span>
-          </h1>
+      <section className="pt-28 pb-24 px-4 border-b border-[var(--color-border)] relative overflow-hidden animate-fade-in-up">
+        <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-12 relative z-10">
+          <div className="flex-1 max-w-2xl">
+            <p className="label-caps text-[var(--color-primary)] mb-6">
+              Road to Devcon IV — Hackathon Submission
+            </p>
+            <h1 className="font-serif text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight leading-[1.05] mb-8 transition-all duration-300">
+              A seal of belonging,<br />
+              <span className="text-[var(--color-primary)]">without opening<br className="hidden sm:inline" /> the cupboard.</span>
+            </h1>
           <p className="text-lg text-warm-gray leading-relaxed max-w-xl mb-12">
             Twelve Indian communities keep their membership lists private.
             Members prove they belong using cryptographic Merkle proofs and
             receive a non-transferable on-chain seal — without revealing who
             else is on the list.
           </p>
-          <div className="flex flex-wrap gap-4">
-            <Link href="/communities" className="btn">
-              Enter the Chaupal
-            </Link>
-            <Link href="/verify" className="btn-secondary">
-              Prove Membership
-            </Link>
+            <div className="flex flex-wrap gap-4 mt-12">
+              <Link href="/communities" className="btn">
+                Enter the Chaupal
+              </Link>
+              <Link href="/verify" className="btn-secondary">
+                Prove Membership
+              </Link>
+            </div>
+          </div>
+          
+          <div className="flex-1 hidden md:flex justify-center relative">
+            {/* The AI Generated Content - Float Animation */}
+            <div className="relative w-96 h-96 rounded-full overflow-hidden border border-[var(--color-border)] shadow-2xl animate-float">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img 
+                src="/bg-pattern.jpg" 
+                alt="AI Generated Security Mandala" 
+                className="w-full h-full object-cover mix-blend-luminosity opacity-90 transition-all duration-500 hover:scale-110 hover:opacity-100" 
+              />
+            </div>
+            {/* Soft glow behind the image */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-[var(--color-primary)] rounded-full blur-[100px] opacity-20 -z-10 animate-pulse"></div>
           </div>
         </div>
       </section>
 
       {/* ─── Privacy Pipeline ─── */}
-      <section id="how-it-works" className="py-24 px-4 bg-charcoal-surface border-b border-border-subtle">
+      <section id="how-it-works" className="py-24 px-4 bg-[var(--color-surface)] border-b border-[var(--color-border)] animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
         <div className="max-w-4xl mx-auto">
           <p className="label-caps mb-3">How it works</p>
           <h2 className="mb-16">From private register to public seal</h2>
@@ -105,7 +121,7 @@ export default function Home() {
       </section>
 
       {/* ─── Twelve Communities ─── */}
-      <section className="py-24 px-4 border-b border-border-subtle">
+      <section className="py-24 px-4 border-b border-[var(--color-border)] animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
         <div className="max-w-4xl mx-auto">
           <p className="label-caps mb-3">The Archive</p>
           <h2 className="mb-4">Twelve Communities</h2>
@@ -145,7 +161,7 @@ export default function Home() {
       </section>
 
       {/* ─── Technical Summary ─── */}
-      <section className="py-24 px-4 bg-charcoal-surface border-b border-border-subtle">
+      <section className="py-24 px-4 bg-[var(--color-surface)] border-b border-[var(--color-border)] animate-fade-in-up" style={{ animationDelay: '0.6s' }}>
         <div className="max-w-4xl mx-auto">
           <p className="label-caps mb-3">Architecture</p>
           <h2 className="mb-12">What stays private. What goes on-chain.</h2>
