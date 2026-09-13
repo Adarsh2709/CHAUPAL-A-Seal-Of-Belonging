@@ -1,0 +1,34 @@
+{
+    "communityId":  "goa-cultural",
+    "name":  "Goa Cultural Mandal",
+    "region":  "Goa",
+    "description":  "A mandal celebrating Goan heritage through festivals and cultural events.",
+    "stewardName":  "Member1",
+    "members":  [
+                    {
+                        "memberId":  "goa-cultural-1",
+                        "displayName":  "Member1",
+                        "memberSecret":  "32b3907e7ead49e2829521f2237e0bc3"
+                    },
+                    {
+                        "memberId":  "goa-cultural-2",
+                        "displayName":  "Member2",
+                        "memberSecret":  "a3f41e3cb4cf45508cbc3fa869615387"
+                    },
+                    {
+                        "memberId":  "goa-cultural-3",
+                        "displayName":  "Member3",
+                        "memberSecret":  "7659d29ed29244bdbdc4f62f195efaed"
+                    },
+                    {
+                        "memberId":  "goa-cultural-4",
+                        "displayName":  "Member4",
+                        "memberSecret":  "7771649f49c9402e994448eff01f1abd"
+                    },
+                    {
+                        "memberId":  "goa-cultural-5",
+                        "displayName":  "Member5",
+                        "memberSecret":  "e7fd2e39d2a94c1697fb4cbb3a20615a"
+                    }
+                ]
+}

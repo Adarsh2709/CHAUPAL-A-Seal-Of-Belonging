@@ -1,0 +1,34 @@
+{
+    "communityId":  "ganesh-mandal",
+    "name":  "Ganesh Mandal",
+    "region":  "Maharashtra",
+    "description":  "A neighbourhood mandal preserving a long-running Ganesh festival tradition.",
+    "stewardName":  "Member1",
+    "members":  [
+                    {
+                        "memberId":  "ganesh-mandal-1",
+                        "displayName":  "Member1",
+                        "memberSecret":  "216ea50b5b8b4e43bb24309a45b40f00"
+                    },
+                    {
+                        "memberId":  "ganesh-mandal-2",
+                        "displayName":  "Member2",
+                        "memberSecret":  "adc9f7629bf14c71a34d92c7e4aa30a8"
+                    },
+                    {
+                        "memberId":  "ganesh-mandal-3",
+                        "displayName":  "Member3",
+                        "memberSecret":  "73359c185377421a9d327eea76d63987"
+                    },
+                    {
+                        "memberId":  "ganesh-mandal-4",
+                        "displayName":  "Member4",
+                        "memberSecret":  "bce2d694ed7b4ca09040c34cc665add1"
+                    },
+                    {
+                        "memberId":  "ganesh-mandal-5",
+                        "displayName":  "Member5",
+                        "memberSecret":  "2524559b08394df7aca1f558b1973790"
+                    }
+                ]
+}

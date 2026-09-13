@@ -1,0 +1,34 @@
+{
+    "communityId":  "kerala-reading",
+    "name":  "Kerala Reading Circle",
+    "region":  "Kerala",
+    "description":  "A circle of avid readers exchanging ideas through monthly book gatherings.",
+    "stewardName":  "Member1",
+    "members":  [
+                    {
+                        "memberId":  "kerala-reading-1",
+                        "displayName":  "Member1",
+                        "memberSecret":  "5d1460e1a55d46c9a83e939f4e536944"
+                    },
+                    {
+                        "memberId":  "kerala-reading-2",
+                        "displayName":  "Member2",
+                        "memberSecret":  "55540fe6737742e0b9660894ca7b7fc2"
+                    },
+                    {
+                        "memberId":  "kerala-reading-3",
+                        "displayName":  "Member3",
+                        "memberSecret":  "643bdfce2b2c46dda1cc1a4f105d1f8b"
+                    },
+                    {
+                        "memberId":  "kerala-reading-4",
+                        "displayName":  "Member4",
+                        "memberSecret":  "ebcc6d440c154f76a0f6d98c4d84f9f1"
+                    },
+                    {
+                        "memberId":  "kerala-reading-5",
+                        "displayName":  "Member5",
+                        "memberSecret":  "96a057c3d0904bb7a3b5f720acc2c6da"
+                    }
+                ]
+}

@@ -1,0 +1,34 @@
+{
+    "communityId":  "tamil-arts",
+    "name":  "Tamil Arts Sabha",
+    "region":  "Tamil Nadu",
+    "description":  "A sabha dedicated to classical Tamil arts, dance, and music.",
+    "stewardName":  "Member1",
+    "members":  [
+                    {
+                        "memberId":  "tamil-arts-1",
+                        "displayName":  "Member1",
+                        "memberSecret":  "4acf7c94fd234218b33bd28a16486164"
+                    },
+                    {
+                        "memberId":  "tamil-arts-2",
+                        "displayName":  "Member2",
+                        "memberSecret":  "0cc656b884aa475f90625f7bfd23cc0b"
+                    },
+                    {
+                        "memberId":  "tamil-arts-3",
+                        "displayName":  "Member3",
+                        "memberSecret":  "795ea97878924f64b40980c09d9de6b3"
+                    },
+                    {
+                        "memberId":  "tamil-arts-4",
+                        "displayName":  "Member4",
+                        "memberSecret":  "eca60a9aa35e4662b01b51533a9953c6"
+                    },
+                    {
+                        "memberId":  "tamil-arts-5",
+                        "displayName":  "Member5",
+                        "memberSecret":  "295f3742d2944c9486f28e788c7b5a4e"
+                    }
+                ]
+}

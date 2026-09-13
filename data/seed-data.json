@@ -1,0 +1,110 @@
+[
+  {
+    "id": "0xb33563273057fe3f0cd6ada0853370d0b91c14da11079ca7acb68eea4a7529c3",
+    "name": "Assam Bihu Committee",
+    "region": "Assam",
+    "description": "A committee organising Bihu festivities and preserving folk traditions.",
+    "stewardName": "Member1",
+    "root": "0xf8f5a69791b6e6a26bf002531348ffeb97be0c9778a93e2ebf5e14d583b88123",
+    "memberCount": 5
+  },
+  {
+    "id": "0xe064822def5b87fe1c58d6547b463ab7a019565d2cbc498a623754d90260eb6b",
+    "name": "Bengali Durga Committee",
+    "region": "West Bengal",
+    "description": "A committee preserving the grandeur of community Durga Puja celebrations.",
+    "stewardName": "Member1",
+    "root": "0xf778823ff5e3aa1ec3a2407bac9145831ca6758636ab0a815bdde8b3ea7255f5",
+    "memberCount": 5
+  },
+  {
+    "id": "0x481dbc9f85b8258f1ae46cb339cdb07ef8f1a936a4ed99baf68217256316a812",
+    "name": "Delhi Community Katta",
+    "region": "Delhi",
+    "description": "An open community space for dialogue, chai and shared city stories.",
+    "stewardName": "Member1",
+    "root": "0x7462c1e2473663fe3b2a81f866ad1c71426e248460cc23a94367e7d92c6076f1",
+    "memberCount": 5
+  },
+  {
+    "id": "0x848e91bed64425bc043dc78d60cec1a4abeb563075396d20891b40dd09341246",
+    "name": "Ganesh Mandal",
+    "region": "Maharashtra",
+    "description": "A neighbourhood mandal preserving a long-running Ganesh festival tradition.",
+    "stewardName": "Member1",
+    "root": "0x3c3f85dcd20ee846678c7b0b5e7d8cf374a1c72a60dc098d4528133637ce213a",
+    "memberCount": 5
+  },
+  {
+    "id": "0xaa2914b728699d284409452a18cada26238c704c55e4eebad4baf8b9f74eceb3",
+    "name": "Goa Cultural Mandal",
+    "region": "Goa",
+    "description": "A mandal celebrating Goan heritage through festivals and cultural events.",
+    "stewardName": "Member1",
+    "root": "0x11e41e810989bda1efcbefc1a3f3e43f3013dd1f78c952c3025a05367d02dd79",
+    "memberCount": 5
+  },
+  {
+    "id": "0xda082ff986975d063876f8c1ef6b0dd9e138d106bc7ab5559f9fab77ebf03048",
+    "name": "Kashmir Handicraft Circle",
+    "region": "Kashmir",
+    "description": "A circle of artisans preserving Kashmiri handicraft heritage.",
+    "stewardName": "Member1",
+    "root": "0x77d6eff336f764b3a0a2f55e0b7afd49c0101c9b591c8cfd34268aea2610725d",
+    "memberCount": 5
+  },
+  {
+    "id": "0x28d05df32f56b09e1da0fd0f336c460205f5e3693008ee4f01426aa79fab06cc",
+    "name": "Kerala Reading Circle",
+    "region": "Kerala",
+    "description": "A circle of avid readers exchanging ideas through monthly book gatherings.",
+    "stewardName": "Member1",
+    "root": "0xe73aad98fcd2fada5cfa7d2c7f77236c2f5971ccbf44ddbcbc48770b62e26558",
+    "memberCount": 5
+  },
+  {
+    "id": "0xb3732223d3be021d28d17644e719858eccefacda54153de0020f4f5ecbc01fb8",
+    "name": "Nagaland Weavers Collective",
+    "region": "Nagaland",
+    "description": "A fictional collective celebrating local weaving traditions and craft.",
+    "stewardName": "Member1",
+    "root": "0xa9a4ab677dc0d857a4877b91cf2d9f104cad71f7c5b4e40d1bca592613f8dca6",
+    "memberCount": 5
+  },
+  {
+    "id": "0x6ea6fda8b5cd7f539c4081dbc770c45a0a03beb69d8d76824427852e07d5c3bb",
+    "name": "Odisha Folk Collective",
+    "region": "Odisha",
+    "description": "A collective keeping Odia folk art and traditions alive.",
+    "stewardName": "Member1",
+    "root": "0x274694dbef99c30e33846074619525c2dd420a38cafae1e8324762b2eca7e385",
+    "memberCount": 5
+  },
+  {
+    "id": "0xc1e9b1dc16ff1da25e9c9886e2e754c2e3f23a51a895f503d34c7d9158ed9ed6",
+    "name": "Punjabi Sangat",
+    "region": "Punjab",
+    "description": "A community gathering built around langar, seva and shared celebrations.",
+    "stewardName": "Member1",
+    "root": "0x2c35ab0a1cac8f94dfbd28a2dbe833ae94c372b9b972b623d930534f4c8f428a",
+    "memberCount": 5
+  },
+  {
+    "id": "0x62d35d90f1d56ca018eb20f84933d3993ab9026239870869b3f3067681be56f3",
+    "name": "Rajasthan Craft Guild",
+    "region": "Rajasthan",
+    "description": "A guild of artisans keeping Rajasthani craft traditions alive.",
+    "stewardName": "Member1",
+    "root": "0x2e8dbfa642df7eaf78a601231d5244978c59b4723a443741c04e564da2d4a5a6",
+    "memberCount": 5
+  },
+  {
+    "id": "0xc87d210209ce70f542a9ef1059780fdf6cfa50cdd670e69c56e4f5f5baccf0fe",
+    "name": "Tamil Arts Sabha",
+    "region": "Tamil Nadu",
+    "description": "A sabha dedicated to classical Tamil arts, dance, and music.",
+    "stewardName": "Member1",
+    "root": "0xf458f59dedd9dcb8dfb13156ba8019412f1cd822b57a7e902a659197f45852fb",
+    "memberCount": 5
+  }
+]

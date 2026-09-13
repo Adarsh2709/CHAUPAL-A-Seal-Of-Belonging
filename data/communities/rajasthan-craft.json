@@ -1,0 +1,34 @@
+{
+    "communityId":  "rajasthan-craft",
+    "name":  "Rajasthan Craft Guild",
+    "region":  "Rajasthan",
+    "description":  "A guild of artisans keeping Rajasthani craft traditions alive.",
+    "stewardName":  "Member1",
+    "members":  [
+                    {
+                        "memberId":  "rajasthan-craft-1",
+                        "displayName":  "Member1",
+                        "memberSecret":  "14ce7394127d4fcf8a65aecaaa22169e"
+                    },
+                    {
+                        "memberId":  "rajasthan-craft-2",
+                        "displayName":  "Member2",
+                        "memberSecret":  "eb6cdb2b687546eb92a093e63927f06e"
+                    },
+                    {
+                        "memberId":  "rajasthan-craft-3",
+                        "displayName":  "Member3",
+                        "memberSecret":  "c5350e58f2a8431097aea7488b8b1ec4"
+                    },
+                    {
+                        "memberId":  "rajasthan-craft-4",
+                        "displayName":  "Member4",
+                        "memberSecret":  "4aaf640960ce41c2ac1c625ec4c73a8f"
+                    },
+                    {
+                        "memberId":  "rajasthan-craft-5",
+                        "displayName":  "Member5",
+                        "memberSecret":  "f23e23b1856b4068bc0cf4b5a3dabd39"
+                    }
+                ]
+}

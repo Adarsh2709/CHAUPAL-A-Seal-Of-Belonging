@@ -1,0 +1,17 @@
+﻿node_modules
+.next
+.env.local
+.env
+out
+dist
+build
+*.log
+
+# Foundry
+/out
+cache_forge
+cache
+
+# Private data
+data/trees/*.json
+!data/trees/.gitkeep

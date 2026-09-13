@@ -1,0 +1,34 @@
+{
+    "communityId":  "odisha-folk",
+    "name":  "Odisha Folk Collective",
+    "region":  "Odisha",
+    "description":  "A collective keeping Odia folk art and traditions alive.",
+    "stewardName":  "Member1",
+    "members":  [
+                    {
+                        "memberId":  "odisha-folk-1",
+                        "displayName":  "Member1",
+                        "memberSecret":  "833f5ea294024bb2a465b1d2dab524cd"
+                    },
+                    {
+                        "memberId":  "odisha-folk-2",
+                        "displayName":  "Member2",
+                        "memberSecret":  "84db42314284470bb00f06c41f155f11"
+                    },
+                    {
+                        "memberId":  "odisha-folk-3",
+                        "displayName":  "Member3",
+                        "memberSecret":  "44f382d1d34148afa2bad9b0a265bc17"
+                    },
+                    {
+                        "memberId":  "odisha-folk-4",
+                        "displayName":  "Member4",
+                        "memberSecret":  "aba9dd2c88854eb9944acbacd95181bb"
+                    },
+                    {
+                        "memberId":  "odisha-folk-5",
+                        "displayName":  "Member5",
+                        "memberSecret":  "7f8142cd217f47e1af977988191fafbd"
+                    }
+                ]
+}

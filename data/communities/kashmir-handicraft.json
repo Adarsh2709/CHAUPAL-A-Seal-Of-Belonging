@@ -1,0 +1,34 @@
+{
+    "communityId":  "kashmir-handicraft",
+    "name":  "Kashmir Handicraft Circle",
+    "region":  "Kashmir",
+    "description":  "A circle of artisans preserving Kashmiri handicraft heritage.",
+    "stewardName":  "Member1",
+    "members":  [
+                    {
+                        "memberId":  "kashmir-handicraft-1",
+                        "displayName":  "Member1",
+                        "memberSecret":  "6ea4f949224f444abcf055228a689832"
+                    },
+                    {
+                        "memberId":  "kashmir-handicraft-2",
+                        "displayName":  "Member2",
+                        "memberSecret":  "071c589a1c624d3ea4802324d5df3c4a"
+                    },
+                    {
+                        "memberId":  "kashmir-handicraft-3",
+                        "displayName":  "Member3",
+                        "memberSecret":  "e68b1eccde094a7f9b218a6d79d9cfa6"
+                    },
+                    {
+                        "memberId":  "kashmir-handicraft-4",
+                        "displayName":  "Member4",
+                        "memberSecret":  "06b5647657e64bf79934a0695343ef9c"
+                    },
+                    {
+                        "memberId":  "kashmir-handicraft-5",
+                        "displayName":  "Member5",
+                        "memberSecret":  "dae683bf0ac841eab42670ca63e9aaef"
+                    }
+                ]
+}

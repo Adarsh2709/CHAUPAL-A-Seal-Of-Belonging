@@ -1,0 +1,34 @@
+{
+    "communityId":  "bengali-durga",
+    "name":  "Bengali Durga Committee",
+    "region":  "West Bengal",
+    "description":  "A committee preserving the grandeur of community Durga Puja celebrations.",
+    "stewardName":  "Member1",
+    "members":  [
+                    {
+                        "memberId":  "bengali-durga-1",
+                        "displayName":  "Member1",
+                        "memberSecret":  "4107adb6033a4a549335151a10b5c6df"
+                    },
+                    {
+                        "memberId":  "bengali-durga-2",
+                        "displayName":  "Member2",
+                        "memberSecret":  "8ad1e447ad9746d0a7b68db77cdf08fb"
+                    },
+                    {
+                        "memberId":  "bengali-durga-3",
+                        "displayName":  "Member3",
+                        "memberSecret":  "c0d68d663e80406da6ae5898fb102a57"
+                    },
+                    {
+                        "memberId":  "bengali-durga-4",
+                        "displayName":  "Member4",
+                        "memberSecret":  "ecfd0638dac34a0589bd8163d3e9214f"
+                    },
+                    {
+                        "memberId":  "bengali-durga-5",
+                        "displayName":  "Member5",
+                        "memberSecret":  "7545944c787845708cf56066d328695d"
+                    }
+                ]
+}

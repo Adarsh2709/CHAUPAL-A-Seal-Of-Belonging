@@ -1,0 +1,126 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&family=Courier+Prime:wght@400;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Base reset ─── */
+* {
+  @apply box-border;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  @apply bg-charcoal text-ivory font-sans text-[15px] leading-relaxed;
+}
+
+::selection {
+  background: rgba(224, 123, 0, 0.25);
+  color: #f5f0e8;
+}
+
+/* ─── Typography ─── */
+h1 {
+  @apply font-serif text-4xl font-bold tracking-tight;
+}
+
+h2 {
+  @apply font-serif text-2xl font-bold tracking-tight;
+}
+
+h3 {
+  @apply font-serif text-xl font-semibold;
+}
+
+a {
+  @apply text-ivory hover:text-saffron transition-colors duration-200;
+}
+
+.mono {
+  @apply font-mono text-[13px] break-all leading-snug;
+}
+
+/* ─── Card ─── */
+.card {
+  @apply bg-charcoal-surface border border-border-subtle p-6 transition-colors duration-200;
+}
+
+.card:hover {
+  @apply border-border-mid;
+}
+
+/* ─── Buttons ─── */
+.btn {
+  @apply inline-flex items-center justify-center px-6 py-3 bg-saffron text-charcoal font-semibold text-sm tracking-wide
+         hover:bg-saffron-dim transition-all duration-200 select-none;
+}
+
+.btn:disabled {
+  @apply opacity-40 cursor-not-allowed;
+}
+
+.btn-secondary {
+  @apply inline-flex items-center justify-center px-6 py-3 border border-border-mid text-ivory/80 font-medium text-sm tracking-wide
+         hover:border-warm-gray hover:text-ivory transition-all duration-200 select-none;
+}
+
+.btn-secondary:disabled {
+  @apply opacity-40 cursor-not-allowed;
+}
+
+/* ─── Form elements ─── */
+input[type="text"],
+input[type="password"],
+select,
+textarea {
+  @apply bg-charcoal border border-border-subtle text-ivory text-sm px-4 py-3
+         focus:border-saffron/50 focus:outline-none focus:ring-1 focus:ring-saffron/20
+         placeholder:text-warm-gray/50 transition-colors duration-200;
+}
+
+/* ─── Utility classes ─── */
+.label-caps {
+  @apply text-[11px] font-semibold tracking-[0.12em] uppercase text-warm-gray;
+}
+
+.divider {
+  @apply border-t border-border-subtle;
+}
+
+.private-badge {
+  @apply inline-flex items-center gap-1.5 text-[11px] font-semibold tracking-widest uppercase text-maroon border border-maroon/20 px-2.5 py-1;
+  background-color: rgba(139, 26, 26, 0.08);
+}
+
+.public-badge {
+  @apply inline-flex items-center gap-1.5 text-[11px] font-semibold tracking-widest uppercase text-deep-green border border-deep-green/20 px-2.5 py-1;
+  background-color: rgba(45, 74, 45, 0.1);
+}
+
+.onchain-badge {
+  @apply inline-flex items-center gap-1.5 text-[11px] font-semibold tracking-widest uppercase text-saffron border border-saffron/20 px-2.5 py-1;
+  background-color: rgba(224, 123, 0, 0.08);
+}
+
+/* ─── Scrollbar ─── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #3d3a34;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #5a5348;
+}

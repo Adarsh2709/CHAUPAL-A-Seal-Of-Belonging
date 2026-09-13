@@ -1,0 +1,34 @@
+{
+    "communityId":  "punjabi-sangat",
+    "name":  "Punjabi Sangat",
+    "region":  "Punjab",
+    "description":  "A community gathering built around langar, seva and shared celebrations.",
+    "stewardName":  "Member1",
+    "members":  [
+                    {
+                        "memberId":  "punjabi-sangat-1",
+                        "displayName":  "Member1",
+                        "memberSecret":  "c83b3d9e5b5d4ac7a7edf95e6fc84163"
+                    },
+                    {
+                        "memberId":  "punjabi-sangat-2",
+                        "displayName":  "Member2",
+                        "memberSecret":  "c0e0f167761c485fbaa6c5356781632f"
+                    },
+                    {
+                        "memberId":  "punjabi-sangat-3",
+                        "displayName":  "Member3",
+                        "memberSecret":  "6cce77e37d3a4105b5442e5c792db428"
+                    },
+                    {
+                        "memberId":  "punjabi-sangat-4",
+                        "displayName":  "Member4",
+                        "memberSecret":  "07c83ed80e674d57b60b4f35d1490b4c"
+                    },
+                    {
+                        "memberId":  "punjabi-sangat-5",
+                        "displayName":  "Member5",
+                        "memberSecret":  "6021d708f28b4ebe9d27ea7570a41018"
+                    }
+                ]
+}
