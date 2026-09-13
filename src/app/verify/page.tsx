@@ -390,7 +390,7 @@ export default function VerifyPage() {
                         using your Aadhaar to prove you are a unique human. Your raw data never leaves this device.
                       </p>
                       <div className="flex justify-center">
-                        <LogInWithAnonAadhaar nullifierSeed={TEST_NULLIFIER_SEED} signal={address} />
+                        <LogInWithAnonAadhaar nullifierSeed={TEST_NULLIFIER_SEED} signal={address ? BigInt(address).toString() : "1"} />
                       </div>
                     </div>
                   ) : (
