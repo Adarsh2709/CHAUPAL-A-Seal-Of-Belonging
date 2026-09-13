@@ -93,6 +93,10 @@ export default function VerifyPage() {
 
   const handleClaimSealDemo = async () => {
     // Demo mode: simulate the on-chain transaction
+    // Save to sessionStorage so the My Seals page can read it
+    if (selectedCommunity) {
+      sessionStorage.setItem("chaupal_demo_seal", selectedCommunity.name);
+    }
     setDemoSealClaimed(true);
   };
 

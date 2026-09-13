@@ -4,6 +4,7 @@ import { Navbar } from "@/components/Navbar";
 import { useAccount, useConnect, useReadContract } from "wagmi";
 import { parseAbi } from "viem";
 import Link from "next/link";
+import { useState, useEffect } from "react";
 
 const ABI = parseAbi([
   "function balanceOf(address owner) view returns (uint256)",
@@ -19,6 +20,17 @@ export default function SealsPage() {
     functionName: "balanceOf",
     args: address ? [address] : undefined,
   }) as { data: bigint | undefined };
+
+  // Check for demo-mode claimed seals stored in sessionStorage
+  const [demoClaimed, setDemoClaimed] = useState<string | null>(null);
+  useEffect(() => {
+    const demo = sessionStorage.getItem("chaupal_demo_seal");
+    if (demo) setDemoClaimed(demo);
+  }, []);
+
+  const onChainBalance = Number(balance || 0);
+  const hasSeal = onChainBalance > 0 || demoClaimed;
+  const displayCount = onChainBalance > 0 ? onChainBalance : (demoClaimed ? 1 : 0);
 
   return (
     <main className="flex-1">
@@ -74,14 +86,14 @@ export default function SealsPage() {
               <div className="border border-border-subtle p-6 mb-8">
                 <span className="label-caps block mb-1">Community seals held</span>
                 <span className="font-serif text-4xl font-bold">
-                  {balance?.toString() || "0"}
+                  {displayCount}
                 </span>
                 <div className="mt-2">
                   <span className="onchain-badge">Soulbound · Non-transferable</span>
                 </div>
               </div>
 
-              {Number(balance || 0) === 0 ? (
+              {!hasSeal ? (
                 /* Empty state */
                 <div className="border border-border-subtle p-8 text-center">
                   <div className="w-24 h-24 mx-auto mb-6 border-2 border-dashed border-border-mid rounded-full flex items-center justify-center">
@@ -106,10 +118,15 @@ export default function SealsPage() {
                       </span>
                     </div>
                   </div>
-                  <p className="text-sm text-warm-gray">
-                    You hold {balance?.toString()} community seal(s).
+                  <p className="text-sm text-warm-gray mb-2">
+                    You hold {displayCount} community seal(s).
                     These are soulbound and cannot be transferred to another wallet.
                   </p>
+                  {demoClaimed && (
+                    <p className="text-xs text-saffron/60 mt-2">
+                      Community: {demoClaimed} (Demo Mode)
+                    </p>
+                  )}
                 </div>
               )}
             </div>
