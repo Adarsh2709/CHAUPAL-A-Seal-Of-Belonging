@@ -40,7 +40,7 @@ export default function Home() {
               <img 
                 src="/bg-pattern.jpg" 
                 alt="AI Generated Security Mandala" 
-                className="w-full h-full object-cover mix-blend-luminosity opacity-90 transition-all duration-500 hover:scale-110 hover:opacity-100" 
+                className="w-full h-full object-cover opacity-90 transition-all duration-500 hover:scale-110 hover:opacity-100" 
               />
             </div>
             {/* Soft glow behind the image */}

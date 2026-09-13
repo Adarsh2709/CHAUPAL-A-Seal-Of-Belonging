@@ -16,8 +16,8 @@
   --color-primary-dim: #b86500;
   --color-success: #2D4A2D;
   --color-danger: #8B1A1A;
-  --bg-opacity: 0.35;
-  --bg-blend: multiply;
+  --bg-opacity: 0.9;
+  --bg-blend: normal;
 }
 
 .dark {
