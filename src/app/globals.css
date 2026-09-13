@@ -16,8 +16,8 @@
   --color-primary-dim: #b86500;
   --color-success: #2D4A2D;
   --color-danger: #8B1A1A;
-  --bg-opacity: 0.9;
-  --bg-blend: normal;
+  --bg-opacity: 0.35;
+  --bg-blend: multiply;
 }
 
 .dark {
@@ -111,10 +111,10 @@ a {
 
 /* ─── Buttons ─── */
 .btn {
-  @apply inline-flex items-center justify-center px-6 py-3 font-semibold text-sm tracking-wide
-         transition-all duration-300 select-none shadow-md hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0;
+  @apply inline-flex items-center justify-center px-6 py-3 font-semibold text-sm tracking-wide transition-all duration-300 select-none shadow-md hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0;
   background-color: var(--color-primary);
-  color: var(--color-bg); /* Use background color for contrast on button */
+  color: var(--color-bg);
+  /* Use background color for contrast on button */
 }
 
 .btn:hover {
@@ -126,8 +126,7 @@ a {
 }
 
 .btn-secondary {
-  @apply inline-flex items-center justify-center px-6 py-3 border font-medium text-sm tracking-wide
-         transition-all duration-300 select-none hover:-translate-y-0.5;
+  @apply inline-flex items-center justify-center px-6 py-3 border font-medium text-sm tracking-wide transition-all duration-300 select-none hover:-translate-y-0.5;
   border-color: var(--color-border-mid);
   color: var(--color-text-muted);
 }
@@ -215,6 +214,7 @@ textarea:focus {
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -226,42 +226,19 @@ textarea:focus {
 }
 
 @keyframes float {
-  0% { transform: translateY(0px) rotate(0deg); }
-  50% { transform: translateY(-20px) rotate(2deg); }
-  100% { transform: translateY(0px) rotate(0deg); }
+  0% {
+    transform: translateY(0px) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-20px) rotate(2deg);
+  }
+
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
 }
 
 .animate-float {
   animation: float 8s ease-in-out infinite;
-}
-
-.star-shape-morph {
-  clip-path: polygon(
-    50% 0%, 
-    81% 10%, 
-    100% 35%, 
-    100% 65%, 
-    81% 90%, 
-    50% 100%, 
-    19% 90%, 
-    0% 65%, 
-    0% 35%, 
-    19% 10%
-  );
-  transition: clip-path 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.star-shape-morph:hover {
-  clip-path: polygon(
-    50% 0%, 
-    61% 35%, 
-    98% 35%, 
-    68% 57%, 
-    79% 91%, 
-    50% 70%, 
-    21% 91%, 
-    32% 57%, 
-    2% 35%, 
-    39% 35%
-  );
 }

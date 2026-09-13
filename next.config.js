@@ -22,11 +22,15 @@ const nextConfig = {
       )
     );
 
+    // Silence all missing optional dependency warnings from Wagmi Connectors
     config.ignoreWarnings = [
       { module: /node_modules\/web-worker/ },
       { module: /node_modules\/ox/ },
       { module: /node_modules\/snarkjs/ },
-      { message: /Critical dependency: the request of a dependency is an expression/ }
+      { message: /Critical dependency: the request of a dependency is an expression/ },
+      { module: /node_modules\/@metamask\/sdk/ },
+      { module: /node_modules\/pino/ },
+      { module: /node_modules\/@walletconnect/ }
     ];
     return config;
   },
