@@ -35,7 +35,7 @@ export default function Home() {
           
           <div className="flex-1 hidden md:flex justify-center relative">
             {/* The AI Generated Content - Float Animation */}
-            <div className="relative w-96 h-96 rounded-full overflow-hidden border border-[var(--color-border)] shadow-2xl animate-float">
+            <div className="relative w-96 h-96 overflow-hidden border border-[var(--color-border)] shadow-2xl animate-float star-shape-morph cursor-pointer">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img 
                 src="/bg-pattern.jpg" 
