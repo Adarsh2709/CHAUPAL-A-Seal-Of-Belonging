@@ -27,7 +27,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
       <QueryClientProvider client={queryClient}>
         <AnonAadhaarProvider _useTestAadhaar={true}>
           <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
-            {mounted && children}
+            {children}
           </ThemeProvider>
         </AnonAadhaarProvider>
       </QueryClientProvider>
