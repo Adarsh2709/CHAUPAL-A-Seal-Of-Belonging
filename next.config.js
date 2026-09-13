@@ -8,11 +8,16 @@ const nextConfig = {
     ignoreDuringBuilds: true,
   },
   webpack: (config, { isServer }) => {
-    if (!isServer) {
-      config.resolve.fallback = {
-        ...config.resolve.fallback,
-        '@x402/evm/upto/client': false,
-      };
+    config.resolve.fallback = {
+      ...config.resolve.fallback,
+      '@x402/evm/upto/client': false,
+    };
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      '@x402/evm/upto/client': false,
+    };
+    if (isServer) {
+      config.externals.push('@x402/evm/upto/client');
     }
     config.ignoreWarnings = [
       { module: /node_modules\/web-worker/ },
