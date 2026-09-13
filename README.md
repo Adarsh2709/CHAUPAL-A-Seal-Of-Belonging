@@ -2,8 +2,6 @@
 
 Privacy-preserving community membership verification on Ethereum. Members prove they belong using Merkle proofs and receive a non-transferable on-chain seal, without revealing the membership list.
 
-Built for Road to Devcon IV.
-
 ## How It Works
 
 Each community keeps its membership register off-chain. Only a Merkle root is published on-chain. A member presents their private credential to generate a proof, the smart contract verifies it against the root, and a soulbound (non-transferable) seal is minted.
