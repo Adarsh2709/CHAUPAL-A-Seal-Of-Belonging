@@ -3,9 +3,11 @@ pragma solidity ^0.8.20;
 
 import "forge-std/Test.sol";
 import "../contracts/ChaupalMembership.sol";
+import "./MockAnonAadhaar.sol";
 
 contract ChaupalMembershipTest is Test {
     ChaupalMembership public chaupal;
+    MockAnonAadhaar public mockAnonAadhaar;
     
     address public steward1 = address(0x111);
     address public steward2 = address(0x222);
@@ -21,9 +23,12 @@ contract ChaupalMembershipTest is Test {
     bytes32 public invalidCommitment;
     bytes32[] public validProof;
     bytes32[] public invalidProof;
+    // Test data for Anon Aadhaar
+    uint256 public testAppNullifierSeed = 123456789;
     
     function setUp() public {
-        chaupal = new ChaupalMembership();
+        mockAnonAadhaar = new MockAnonAadhaar(true);
+        chaupal = new ChaupalMembership(address(mockAnonAadhaar), testAppNullifierSeed);
         
         // We will test the logic. We will populate mock proof data
         // For actual valid proof testing, we will use forge ffi or precomputed values.
@@ -100,8 +105,14 @@ contract ChaupalMembershipTest is Test {
     function test_ClaimSeal() public {
         chaupal.registerCommunity(comm1, "Test Comm", steward1, root1);
         
+        uint256 nullifier = 1111;
+        uint256 timestamp = 12345;
+        uint256 signal = uint256(uint160(member));
+        uint256[4] memory revealArray = [uint256(0), 0, 0, 0];
+        uint256[8] memory groth16Proof = [uint256(0), 0, 0, 0, 0, 0, 0, 0];
+        
         vm.prank(member);
-        chaupal.claimSeal(comm1, validCommitment, validProof);
+        chaupal.claimSeal(comm1, validCommitment, validProof, nullifier, timestamp, signal, revealArray, groth16Proof);
         
         assertTrue(chaupal.hasSeal(member, comm1));
         assertEq(chaupal.ownerOf(0), member);
@@ -110,11 +121,64 @@ contract ChaupalMembershipTest is Test {
     function test_CannotTransferSeal() public {
         chaupal.registerCommunity(comm1, "Test Comm", steward1, root1);
         
+        uint256 nullifier = 1111;
+        uint256 timestamp = 12345;
+        uint256 signal = uint256(uint160(member));
+        uint256[4] memory revealArray = [uint256(0), 0, 0, 0];
+        uint256[8] memory groth16Proof = [uint256(0), 0, 0, 0, 0, 0, 0, 0];
+        
         vm.prank(member);
-        chaupal.claimSeal(comm1, validCommitment, validProof);
+        chaupal.claimSeal(comm1, validCommitment, validProof, nullifier, timestamp, signal, revealArray, groth16Proof);
         
         vm.prank(member);
         vm.expectRevert("Chaupal: Community seals are non-transferable");
         chaupal.transferFrom(member, other, 0);
+    }
+
+    function test_DuplicateNullifierFails() public {
+        chaupal.registerCommunity(comm1, "Test Comm", steward1, root1);
+        
+        uint256 nullifier = 1111;
+        uint256 timestamp = 12345;
+        uint256 signal = uint256(uint160(member));
+        uint256[4] memory revealArray = [uint256(0), 0, 0, 0];
+        uint256[8] memory groth16Proof = [uint256(0), 0, 0, 0, 0, 0, 0, 0];
+        
+        vm.prank(member);
+        chaupal.claimSeal(comm1, validCommitment, validProof, nullifier, timestamp, signal, revealArray, groth16Proof);
+        
+        // Attempt to claim again with the same nullifier from a different member address (to bypass the msg.sender check)
+        vm.prank(other);
+        vm.expectRevert("Chaupal: Human already claimed a seal");
+        chaupal.claimSeal(comm1, validCommitment, validProof, nullifier, timestamp, uint256(uint160(other)), revealArray, groth16Proof);
+    }
+
+    function test_InvalidSignalFails() public {
+        chaupal.registerCommunity(comm1, "Test Comm", steward1, root1);
+        
+        uint256 nullifier = 1111;
+        uint256 timestamp = 12345;
+        uint256 signal = uint256(uint160(other)); // Signal doesn't match msg.sender
+        uint256[4] memory revealArray = [uint256(0), 0, 0, 0];
+        uint256[8] memory groth16Proof = [uint256(0), 0, 0, 0, 0, 0, 0, 0];
+        
+        vm.prank(member);
+        vm.expectRevert("Chaupal: Signal must be the sender address");
+        chaupal.claimSeal(comm1, validCommitment, validProof, nullifier, timestamp, signal, revealArray, groth16Proof);
+    }
+    
+    function test_InvalidAnonAadhaarProofFails() public {
+        chaupal.registerCommunity(comm1, "Test Comm", steward1, root1);
+        
+        uint256 nullifier = 1111;
+        uint256 timestamp = 12345;
+        uint256 signal = uint256(uint160(member));
+        uint256[4] memory revealArray = [uint256(0), 0, 0, 0];
+        // groth16Proof[0] = 999 is our mock way of triggering a failure
+        uint256[8] memory groth16Proof = [uint256(999), 0, 0, 0, 0, 0, 0, 0];
+        
+        vm.prank(member);
+        vm.expectRevert("Chaupal: Invalid Anon Aadhaar proof");
+        chaupal.claimSeal(comm1, validCommitment, validProof, nullifier, timestamp, signal, revealArray, groth16Proof);
     }
 }

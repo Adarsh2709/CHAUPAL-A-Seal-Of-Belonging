@@ -9,9 +9,11 @@ import {
   useWaitForTransactionReceipt,
 } from "wagmi";
 import { parseAbi } from "viem";
+import { LogInWithAnonAadhaar, useAnonAadhaar } from "@anon-aadhaar/react";
+import { packGroth16Proof } from "@anon-aadhaar/core";
 
 const ABI = parseAbi([
-  "function claimSeal(bytes32 communityId, bytes32 memberCommitment, bytes32[] calldata proof) external",
+  "function claimSeal(bytes32 communityId, bytes32 memberCommitment, bytes32[] calldata proof, uint256 nullifier, uint256 timestamp, uint256 signal, uint256[4] calldata revealArray, uint256[8] calldata groth16Proof) external",
 ]);
 const CONTRACT = process.env.NEXT_PUBLIC_CONTRACT_ADDRESS as `0x${string}`;
 
@@ -40,6 +42,9 @@ export default function VerifyPage() {
   const [communities, setCommunities] = useState<CommunityInfo[]>([]);
   const [loading, setLoading] = useState(false);
   const [showProofDetail, setShowProofDetail] = useState(false);
+  
+  const [anonAadhaar] = useAnonAadhaar();
+  const TEST_NULLIFIER_SEED = 123456789; // Matches the smart contract test/app seed
 
   const { address, isConnected } = useAccount();
   const { connectors, connect, isPending: isConnecting } = useConnect();
@@ -85,24 +90,52 @@ export default function VerifyPage() {
   };
 
   const handleClaimSeal = async () => {
-    if (!proofData || !CONTRACT) return;
-    writeContract({
-      address: CONTRACT,
-      abi: ABI,
-      functionName: "claimSeal",
-      args: [
-        proofData.communityId as `0x${string}`,
-        proofData.memberCommitment as `0x${string}`,
-        proofData.proof as `0x${string}`[],
-      ],
-    });
+    if (!proofData || !CONTRACT || !isConnected || anonAadhaar.status !== "logged-in") return;
+    
+    try {
+      const pcdStr = anonAadhaar.anonAadhaarProofs['0'].pcd;
+      const pcdObj = JSON.parse(pcdStr);
+      const aaProof = pcdObj.proof;
+
+      const nullifier = BigInt(aaProof.nullifier);
+      const timestamp = BigInt(aaProof.timestamp);
+      // Ensure the signal sent to Anon Aadhaar is the connected address
+      const signal = BigInt(address as string);
+      
+      const revealArray = [
+        BigInt(aaProof.ageAbove18),
+        BigInt(aaProof.gender),
+        BigInt(aaProof.pincode),
+        BigInt(aaProof.state)
+      ];
+      
+      const packedGroth16 = packGroth16Proof(aaProof.groth16Proof).map(x => BigInt(x as string));
+
+      writeContract({
+        address: CONTRACT,
+        abi: ABI,
+        functionName: "claimSeal",
+        args: [
+          proofData.communityId as `0x${string}`,
+          proofData.memberCommitment as `0x${string}`,
+          proofData.proof as `0x${string}`[],
+          nullifier,
+          timestamp,
+          signal,
+          revealArray,
+          packedGroth16
+        ],
+      });
+    } catch (e) {
+      console.error("Error processing Anon Aadhaar proof", e);
+    }
   };
 
   /* ─── Step indicator ─── */
   const steps = [
     { n: 1, label: "Community" },
     { n: 2, label: "Credential" },
-    { n: 3, label: "Proof" },
+    { n: 3, label: "Unique Identity" },
     { n: 4, label: "Seal" },
   ];
 
@@ -317,12 +350,12 @@ export default function VerifyPage() {
                 </div>
               </div>
 
-              {/* Wallet + Claim */}
+              {/* Step 3 & 4 (Combined for Anon Aadhaar and Wallet) */}
               {!isConnected ? (
-                <div className="border border-saffron/20 p-5">
-                  <span className="label-caps block mb-3">Connect wallet to claim seal</span>
+                <div className="border border-saffron/20 p-5 mb-6">
+                  <span className="label-caps block mb-3">Step 3: Connect wallet</span>
                   <p className="text-[13px] text-warm-gray mb-4">
-                    A wallet transaction is required to claim your non-transferable community seal.
+                    Connect your wallet to generate a cryptographic identity proof.
                   </p>
                   <div className="space-y-2">
                     {connectors.map((connector) => (
@@ -339,9 +372,9 @@ export default function VerifyPage() {
                 </div>
               ) : (
                 <div className="space-y-4">
-                  <div className="flex items-center justify-between p-4 border border-deep-green/20">
+                  <div className="flex items-center justify-between p-4 border border-deep-green/20 mb-6">
                     <div>
-                      <span className="label-caps block mb-0.5">Connected</span>
+                      <span className="label-caps block mb-0.5">Connected Wallet</span>
                       <span className="font-mono text-[12px] text-ivory/60">
                         {address}
                       </span>
@@ -349,20 +382,41 @@ export default function VerifyPage() {
                     <span className="public-badge">Wallet ✓</span>
                   </div>
 
-                  <button
-                    onClick={handleClaimSeal}
-                    disabled={isWriting || isConfirming}
-                    className="btn w-full text-base py-4"
-                  >
-                    {isWriting
-                      ? "Waiting for signature…"
-                      : isConfirming
-                      ? "Confirming on-chain…"
-                      : "Claim Community Seal"}
-                  </button>
+                  {anonAadhaar.status !== "logged-in" ? (
+                    <div className="border border-saffron/20 p-6 text-center animate-fade-in">
+                      <h3 className="text-lg font-semibold mb-2">Prove Unique Identity</h3>
+                      <p className="text-sm text-warm-gray mb-6">
+                        Chaupal enforces &quot;One Human, One Claim&quot;. Please generate a Zero-Knowledge proof 
+                        using your Aadhaar to prove you are a unique human. Your raw data never leaves this device.
+                      </p>
+                      <div className="flex justify-center">
+                        <LogInWithAnonAadhaar nullifierSeed={TEST_NULLIFIER_SEED} signal={address} />
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="border border-deep-green/20 p-6 animate-fade-in">
+                      <div className="flex items-center gap-4 py-3 mb-4">
+                        <div className="w-6 h-6 flex items-center justify-center text-deep-green text-sm bg-deep-green/10 rounded-full">✓</div>
+                        <span className="text-sm text-ivory/80 flex-1">Anon Aadhaar Proof Generated</span>
+                        <span className="private-badge">ZK Proof</span>
+                      </div>
+                      
+                      <button
+                        onClick={handleClaimSeal}
+                        disabled={isWriting || isConfirming}
+                        className="btn w-full text-base py-4"
+                      >
+                        {isWriting
+                          ? "Waiting for signature…"
+                          : isConfirming
+                          ? "Confirming on-chain…"
+                          : "Claim Community Seal"}
+                      </button>
+                    </div>
+                  )}
 
                   {isConfirmed && (
-                    <div className="border border-deep-green/30 bg-deep-green/5 p-6 text-center animate-fade-in">
+                    <div className="border border-deep-green/30 bg-deep-green/5 p-6 text-center animate-fade-in mt-6">
                       {/* The Seal */}
                       <div className="w-32 h-32 mx-auto mb-6 border-2 border-saffron rounded-full flex items-center justify-center">
                         <div className="text-center">

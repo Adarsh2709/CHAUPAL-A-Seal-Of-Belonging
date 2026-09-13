@@ -3,6 +3,7 @@ pragma solidity ^0.8.20;
 
 import "@openzeppelin/contracts/utils/cryptography/MerkleProof.sol";
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+import "@anon-aadhaar/contracts/interfaces/IAnonAadhaar.sol";
 
 contract ChaupalMembership is ERC721 {
     
@@ -24,6 +25,11 @@ contract ChaupalMembership is ERC721 {
     // Track if an address has claimed a seal for a community
     mapping(address => mapping(bytes32 => bool)) public hasSeal;
     
+    // Anon Aadhaar Sybil Resistance
+    IAnonAadhaar public anonAadhaarVerifier;
+    uint256 public appNullifierSeed;
+    mapping(uint256 => bool) public usedNullifiers;
+
     // Token ID counter
     uint256 private _nextTokenId;
 
@@ -31,7 +37,10 @@ contract ChaupalMembership is ERC721 {
     event RootUpdated(bytes32 indexed id, bytes32 oldRoot, bytes32 newRoot, uint256 version);
     event SealClaimed(address indexed member, bytes32 indexed communityId, uint256 tokenId);
 
-    constructor() ERC721("Chaupal Seal", "CHPL") {}
+    constructor(address _verifier, uint256 _seed) ERC721("Chaupal Seal", "CHPL") {
+        anonAadhaarVerifier = IAnonAadhaar(_verifier);
+        appNullifierSeed = _seed;
+    }
 
     // -----------------------------------------
     // COMMUNITY MANAGEMENT
@@ -99,10 +108,37 @@ contract ChaupalMembership is ERC721 {
     function claimSeal(
         bytes32 communityId,
         bytes32 memberCommitment,
-        bytes32[] calldata proof
+        bytes32[] calldata proof,
+        // Anon Aadhaar proof inputs
+        uint256 nullifier,
+        uint256 timestamp,
+        uint256 signal,
+        uint256[4] calldata revealArray,
+        uint256[8] calldata groth16Proof
     ) external {
         require(!hasSeal[msg.sender][communityId], "Chaupal: Seal already claimed for this community");
+        require(!usedNullifiers[nullifier], "Chaupal: Human already claimed a seal");
+        
+        // Ensure signal is the sender's address (bound to specific recipient)
+        require(signal == uint256(uint160(msg.sender)), "Chaupal: Signal must be the sender address");
+        
+        // Verify Anon Aadhaar Proof
+        require(
+            anonAadhaarVerifier.verifyAnonAadhaarProof(
+                appNullifierSeed,
+                nullifier,
+                timestamp,
+                signal,
+                revealArray,
+                groth16Proof
+            ),
+            "Chaupal: Invalid Anon Aadhaar proof"
+        );
+
         require(verifyMembership(communityId, memberCommitment, proof), "Chaupal: Invalid membership proof");
+
+        usedNullifiers[nullifier] = true;
+
 
         uint256 tokenId = _nextTokenId++;
         
