@@ -1,17 +1,39 @@
-﻿node_modules
-.next
-.env.local
+# Dependencies
+node_modules/
+
+# Next.js
+.next/
+out/
+dist/
+build/
+next-env.d.ts
+
+# Environment
 .env
-out
-dist
-build
-*.log
+.env.local
+.env.production
 
 # Foundry
-/out
-cache_forge
-cache
+cache/
+cache_forge/
+foundry.lock
 
-# Private data
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE / Editor
+.vscode/
+.idea/
+
+# AI agent configs
+.agents/
+.claude/
+.gemini/
+
+# Private data — Merkle trees contain member commitments
 data/trees/*.json
 !data/trees/.gitkeep
