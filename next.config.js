@@ -5,7 +5,7 @@ const path = require('path');
 const emptyModule = path.resolve(__dirname, 'src', 'lib', 'empty-module.js');
 
 const nextConfig = {
-  reactStrictMode: true,
+  reactStrictMode: false,
   typescript: {
     ignoreBuildErrors: true,
   },
