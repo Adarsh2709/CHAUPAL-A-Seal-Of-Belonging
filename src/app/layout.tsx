@@ -14,10 +14,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className="bg-charcoal text-ivory">
+    <html lang="en" suppressHydrationWarning>
+      <body className="antialiased">
         <Providers>
-          <div className="min-h-screen flex flex-col">
+          <div className="min-h-screen flex flex-col relative z-10">
             {children}
           </div>
         </Providers>

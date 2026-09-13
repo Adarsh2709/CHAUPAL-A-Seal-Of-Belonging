@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { createConfig, http, WagmiProvider } from 'wagmi';
 import { mainnet, sepolia, foundry } from 'wagmi/chains';
 import { AnonAadhaarProvider } from '@anon-aadhaar/react';
+import { ThemeProvider } from 'next-themes';
 
 const queryClient = new QueryClient();
 
@@ -25,7 +26,9 @@ export function Providers({ children }: { children: React.ReactNode }) {
     <WagmiProvider config={wagmiConfig}>
       <QueryClientProvider client={queryClient}>
         <AnonAadhaarProvider _useTestAadhaar={true}>
-          {mounted && children}
+          <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
+            {mounted && children}
+          </ThemeProvider>
         </AnonAadhaarProvider>
       </QueryClientProvider>
     </WagmiProvider>

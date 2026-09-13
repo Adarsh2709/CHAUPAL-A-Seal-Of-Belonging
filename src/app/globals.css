@@ -4,7 +4,37 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ─── Base reset ─── */
+/* ─── Base reset & Variables ─── */
+:root {
+  --color-bg: #f8f6f0;
+  --color-surface: #ffffff;
+  --color-text: #2a2a2a;
+  --color-text-muted: #5a5a5a;
+  --color-border: #e2dcd0;
+  --color-border-mid: #c8c0b0;
+  --color-primary: #d37300;
+  --color-primary-dim: #b86500;
+  --color-success: #2D4A2D;
+  --color-danger: #8B1A1A;
+  --bg-opacity: 0.1;
+  --bg-blend: multiply;
+}
+
+.dark {
+  --color-bg: #1a1a1a;
+  --color-surface: #1e1e1e;
+  --color-text: #f5f0e8;
+  --color-text-muted: #8a8070;
+  --color-border: #242424;
+  --color-border-mid: #333333;
+  --color-primary: #E07B00;
+  --color-primary-dim: #b86500;
+  --color-success: #3c5e3c;
+  --color-danger: #9e2a2a;
+  --bg-opacity: 0.05;
+  --bg-blend: screen;
+}
+
 * {
   @apply box-border;
 }
@@ -16,29 +46,52 @@ html {
 }
 
 body {
-  @apply bg-charcoal text-ivory font-sans text-[15px] leading-relaxed;
+  @apply font-sans text-[15px] leading-relaxed transition-colors duration-500 ease-in-out;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  position: relative;
+}
+
+/* Background image with pseudo element to control opacity and blending */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-image: url('/bg-pattern.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  opacity: var(--bg-opacity);
+  mix-blend-mode: var(--bg-blend);
+  z-index: -1;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
 }
 
 ::selection {
   background: rgba(224, 123, 0, 0.25);
-  color: #f5f0e8;
+  color: var(--color-text);
 }
 
 /* ─── Typography ─── */
 h1 {
-  @apply font-serif text-4xl font-bold tracking-tight;
+  @apply font-serif text-4xl font-bold tracking-tight text-[var(--color-text)];
 }
 
 h2 {
-  @apply font-serif text-2xl font-bold tracking-tight;
+  @apply font-serif text-2xl font-bold tracking-tight text-[var(--color-text)];
 }
 
 h3 {
-  @apply font-serif text-xl font-semibold;
+  @apply font-serif text-xl font-semibold text-[var(--color-text)];
 }
 
 a {
-  @apply text-ivory hover:text-saffron transition-colors duration-200;
+  @apply hover:text-[var(--color-primary)] transition-colors duration-200;
+  color: var(--color-text);
 }
 
 .mono {
@@ -47,30 +100,45 @@ a {
 
 /* ─── Card ─── */
 .card {
-  @apply bg-charcoal-surface border border-border-subtle p-6 transition-colors duration-200;
+  @apply p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
 }
 
 .card:hover {
-  @apply border-border-mid;
+  border-color: var(--color-border-mid);
 }
 
 /* ─── Buttons ─── */
 .btn {
-  @apply inline-flex items-center justify-center px-6 py-3 bg-saffron text-charcoal font-semibold text-sm tracking-wide
-         hover:bg-saffron-dim transition-all duration-200 select-none;
+  @apply inline-flex items-center justify-center px-6 py-3 font-semibold text-sm tracking-wide
+         transition-all duration-300 select-none shadow-md hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0;
+  background-color: var(--color-primary);
+  color: var(--color-bg); /* Use background color for contrast on button */
+}
+
+.btn:hover {
+  background-color: var(--color-primary-dim);
 }
 
 .btn:disabled {
-  @apply opacity-40 cursor-not-allowed;
+  @apply opacity-50 cursor-not-allowed hover:translate-y-0 hover:shadow-none;
 }
 
 .btn-secondary {
-  @apply inline-flex items-center justify-center px-6 py-3 border border-border-mid text-ivory/80 font-medium text-sm tracking-wide
-         hover:border-warm-gray hover:text-ivory transition-all duration-200 select-none;
+  @apply inline-flex items-center justify-center px-6 py-3 border font-medium text-sm tracking-wide
+         transition-all duration-300 select-none hover:-translate-y-0.5;
+  border-color: var(--color-border-mid);
+  color: var(--color-text-muted);
+}
+
+.btn-secondary:hover {
+  border-color: var(--color-text-muted);
+  color: var(--color-text);
 }
 
 .btn-secondary:disabled {
-  @apply opacity-40 cursor-not-allowed;
+  @apply opacity-50 cursor-not-allowed hover:translate-y-0;
 }
 
 /* ─── Form elements ─── */
@@ -78,33 +146,49 @@ input[type="text"],
 input[type="password"],
 select,
 textarea {
-  @apply bg-charcoal border border-border-subtle text-ivory text-sm px-4 py-3
-         focus:border-saffron/50 focus:outline-none focus:ring-1 focus:ring-saffron/20
-         placeholder:text-warm-gray/50 transition-colors duration-200;
+  @apply text-sm px-4 py-3 focus:outline-none focus:ring-2 transition-all duration-300;
+  background-color: var(--color-bg);
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--color-primary);
+  --tw-ring-color: color-mix(in srgb, var(--color-primary) 20%, transparent);
 }
 
 /* ─── Utility classes ─── */
 .label-caps {
-  @apply text-[11px] font-semibold tracking-[0.12em] uppercase text-warm-gray;
+  @apply text-[11px] font-semibold tracking-[0.12em] uppercase transition-colors duration-300;
+  color: var(--color-text-muted);
 }
 
 .divider {
-  @apply border-t border-border-subtle;
+  border-top: 1px solid var(--color-border);
 }
 
 .private-badge {
-  @apply inline-flex items-center gap-1.5 text-[11px] font-semibold tracking-widest uppercase text-maroon border border-maroon/20 px-2.5 py-1;
-  background-color: rgba(139, 26, 26, 0.08);
+  @apply inline-flex items-center gap-1.5 text-[11px] font-semibold tracking-widest uppercase border px-2.5 py-1 transition-colors duration-300;
+  color: var(--color-danger);
+  border-color: color-mix(in srgb, var(--color-danger) 30%, transparent);
+  background-color: color-mix(in srgb, var(--color-danger) 8%, transparent);
 }
 
 .public-badge {
-  @apply inline-flex items-center gap-1.5 text-[11px] font-semibold tracking-widest uppercase text-deep-green border border-deep-green/20 px-2.5 py-1;
-  background-color: rgba(45, 74, 45, 0.1);
+  @apply inline-flex items-center gap-1.5 text-[11px] font-semibold tracking-widest uppercase border px-2.5 py-1 transition-colors duration-300;
+  color: var(--color-success);
+  border-color: color-mix(in srgb, var(--color-success) 30%, transparent);
+  background-color: color-mix(in srgb, var(--color-success) 10%, transparent);
 }
 
 .onchain-badge {
-  @apply inline-flex items-center gap-1.5 text-[11px] font-semibold tracking-widest uppercase text-saffron border border-saffron/20 px-2.5 py-1;
-  background-color: rgba(224, 123, 0, 0.08);
+  @apply inline-flex items-center gap-1.5 text-[11px] font-semibold tracking-widest uppercase border px-2.5 py-1 transition-colors duration-300;
+  color: var(--color-primary);
+  border-color: color-mix(in srgb, var(--color-primary) 30%, transparent);
+  background-color: color-mix(in srgb, var(--color-primary) 8%, transparent);
 }
 
 /* ─── Scrollbar ─── */
@@ -117,10 +201,26 @@ textarea {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #3d3a34;
+  background: var(--color-border-mid);
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #5a5348;
+  background: var(--color-text-muted);
+}
+
+/* ─── Custom Animations ─── */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
