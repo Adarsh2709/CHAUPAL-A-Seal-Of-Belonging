@@ -7,7 +7,13 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
-  webpack: (config) => {
+  webpack: (config, { isServer }) => {
+    if (!isServer) {
+      config.resolve.fallback = {
+        ...config.resolve.fallback,
+        '@x402/evm/upto/client': false,
+      };
+    }
     config.ignoreWarnings = [
       { module: /node_modules\/web-worker/ },
       { module: /node_modules\/ox/ },
